@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -26,10 +27,9 @@ public class DataJob {
     @Size(max = 15, message = "Input file name maximum size 15 character")
     private String inputFileName;
 
+    private LocalDateTime processingStartDt;
 
-    private String processingStartDt;
-
-    private String processingEndDt;
+    private LocalDateTime processingEndDt;
 
     @NotBlank(message = "Data feed should not be empty or null")
     @Size(max = 10, message = "Data feed maximum size 10 character")
@@ -55,8 +55,11 @@ public class DataJob {
     @Size(max = 15, message = "External system name maximum size 15 character")
     private String externalSystemName;
 
-
     private Long orgId;
 
     private String orgUuid;
+
+    private DataChannel dataChannel;
+
+    private JobStatusType jobStatusType;
 }

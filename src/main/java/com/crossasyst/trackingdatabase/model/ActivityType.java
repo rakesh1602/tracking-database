@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Data
@@ -21,4 +22,6 @@ public class ActivityType {
     @NotBlank(message = "ActiveBit should not be empty or null")
     @Size(max = 10, message = "ActiveBit maximum size 10 character")
     private Integer activeBit;
+
+    /*private List<Activity> activity;*/
 }

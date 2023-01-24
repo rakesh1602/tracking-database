@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,23 +17,22 @@ import java.util.List;
 public class MessageEntity {
 
     @Id
+    @SequenceGenerator(name = "msg_seq_id", sequenceName = "msg_seq_id", initialValue = 5000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "msg_seq_id")
     @Column(name = "msg_Id")
     private Long msgId;
 
     @Column(name = "data_job_guid")
     private String dataJobGuid;
 
-    @Column(name = "processing_status_type")
-    private String processingStatusType;
-
     @Column(name = "log_session_id")
     private String logSessionId;
 
     @Column(name = "processing_start_dt")
-    private Date processingStartDt;
+    private LocalDateTime processingStartDt;
 
     @Column(name = "processing_end_dt")
-    private Date processingEndDt;
+    private LocalDateTime processingEndDt;
 
     @Column(name = "attributes")
     private String attributes;
@@ -68,7 +68,7 @@ public class MessageEntity {
     private String externalMessageId;
 
     @Column(name = "revision")
-    private Long revision;
+    private Integer revision;
 
     @Column(name = "error_cd")
     private String errorCd;
@@ -79,12 +79,11 @@ public class MessageEntity {
     @Column(name = "error_severity")
     private String errorSeverity;
 
-    @OneToMany(mappedBy = "messageEntity")
+   /* @OneToMany(mappedBy = "messageEntity")
     private List<ActivityEntity> activityEntity;
-
-    @OneToMany(mappedBy = "messageEntity")
-    private List<ObjectRefEntity> objectRefEntity;
-
+*/
+   /* @OneToMany(mappedBy = "messageEntity")
+    private List<ObjectRefEntity> objectRefEntity;*/
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "processing_status_type_id")

@@ -3,6 +3,7 @@ package com.crossasyst.trackingdatabase.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,12 +12,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "activity")
-public class ProcessingStatusTypeEntity{
+@Table(name = "processing_status_type")
+public class ProcessingStatusTypeEntity {
 
     @Id
-    @Column(name = "processing_status_type")
-    private String processingStatusType;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @Column(name = "processing_status_type_cd")
+    private String processingStatusTypeCd;
 
     @Column(name = "description")
     private String description;
@@ -24,9 +27,9 @@ public class ProcessingStatusTypeEntity{
     @Column(name = "active_bit")
     private Long activeBit;
 
-    @OneToMany(mappedBy = "processingStatusTypeEntity")
-    private List<ActivityEntity> activityEntity;
+    /*@OneToMany(mappedBy = "processingStatusTypeEntity")
+    private List<ActivityEntity> activityEntity;*/
 
-    @OneToMany(mappedBy = "processingStatusTypeEntity" )
-    private List<MessageEntity> messageEntity;
+   /* @OneToMany(mappedBy = "processingStatusTypeEntity")
+    private List<MessageEntity> messageEntity;*/
 }

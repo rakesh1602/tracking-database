@@ -33,7 +33,7 @@ public class DataJobService {
 
         DataJobResponse dataJobResponse = new DataJobResponse();
         dataJobResponse.setDataJobID(dataJobEntity.getDataJobId());
-        dataJobResponse.setDataJobGUID(String.valueOf(dataJobEntity.getUuid()));
+        dataJobResponse.setDataJobGUID(dataJobEntity.getDataJobGUID());
 
         return dataJobResponse;
     }

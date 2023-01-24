@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -13,26 +15,18 @@ import javax.persistence.*;
 @Table(name = "activity")
 public class ActivityEntity {
     @Id
-    @Column(name = "activity_id")
+    @SequenceGenerator(name = "activity_seq_id", sequenceName = "activity_seq_id", initialValue = 1000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "activity_seq_id")
     private Integer activityId;
-
-    @Column(name = "activity_type")
-    private String activityType;
-
-    @Column(name = "msg_id")
-    private Integer msgId;
-
-    @Column(name = "processing_status_type_cd")
-    private String processingStatusTypeCd;
 
     @Column(name = "activity_name")
     private String activityName;
 
     @Column(name = "processing_start_date")
-    private String processingStartDate;
+    private LocalDateTime processingStartDate;
 
     @Column(name = "processing_end_date")
-    private String processingEndDate;
+    private LocalDateTime processingEndDate;
 
     @Column(name = "revision")
     private Integer revision;

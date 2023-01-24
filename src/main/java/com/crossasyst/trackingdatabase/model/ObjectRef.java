@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.model;
 
+import com.crossasyst.trackingdatabase.entity.NodeTypeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,8 @@ public class ObjectRef {
     private String mesGuid;
 
     private Integer revision;
+
+    //private Message message;
+
+    private NodeTypeEntity nodeTypeEntity;
 }

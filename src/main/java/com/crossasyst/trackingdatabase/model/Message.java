@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,9 +21,9 @@ public class Message {
     @NotBlank(message = "Log session id should not be empty or null ")
     private String logSessionId;
 
-    private Date processingStartDt;
+    private LocalDateTime processingStartDt;
 
-    private Date processingEndDt;
+    private LocalDateTime processingEndDt;
 
     @NotBlank(message = "Attributes should not be empty or null")
     @Size(max = 20, message = "Attributes maximum size 20 character")
@@ -75,4 +77,10 @@ public class Message {
     @NotBlank(message = "Error severity should not be empty or null")
     @Size(max = 10, message = "Error severity maximum size 10 character")
     private String errorSeverity;
+
+    /*private List<Activity> activityList;
+
+    private List<ObjectRef> objectRefList;*/
+
+    private ProcessingStatusType processingStatusType;
 }

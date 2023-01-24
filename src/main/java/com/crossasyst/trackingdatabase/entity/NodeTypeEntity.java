@@ -3,6 +3,7 @@ package com.crossasyst.trackingdatabase.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class NodeTypeEntity {
 
     @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "node_type_cd")
     private String nodeTypeCd;
 
@@ -24,6 +27,6 @@ public class NodeTypeEntity {
     @Column(name = "active_bit")
     private Short activeBit;
 
-    @OneToMany
-    private List<ObjectRefEntity> objectRefEntity;
+   /* @OneToMany
+    private List<ObjectRefEntity> objectRefEntity;*/
 }

@@ -1,7 +1,9 @@
 package com.crossasyst.trackingdatabase.controller;
 
 
+import com.crossasyst.trackingdatabase.model.DataChannel;
 import com.crossasyst.trackingdatabase.model.DataJob;
+import com.crossasyst.trackingdatabase.model.JobStatusType;
 import com.crossasyst.trackingdatabase.response.DataJobResponse;
 import com.crossasyst.trackingdatabase.service.DataJobService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -42,4 +44,6 @@ public class DataJobController {
 
         return new ResponseEntity<>(dataJobResponse, HttpStatus.OK);
     }
+
+
 }

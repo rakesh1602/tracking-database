@@ -15,7 +15,7 @@ public class ObjectRefEntity {
 
     @Id
     @Column(name = "object_ref_id")
-    private Long id;
+    private Long objectRefId;
 
     @Column(name = "objectRef")
     private String objectRef;

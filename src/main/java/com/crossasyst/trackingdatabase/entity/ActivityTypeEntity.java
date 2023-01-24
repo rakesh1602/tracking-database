@@ -3,6 +3,7 @@ package com.crossasyst.trackingdatabase.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ActivityTypeEntity {
 
     @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "activity_type_cd")
     private String activityTypeCd;
 
@@ -25,7 +28,7 @@ public class ActivityTypeEntity {
     private Short activeBit;
 
 
-    @OneToMany
+    /*@OneToMany
     @JoinColumn(name = "activity_entity_activity_id")
-    private List<ActivityEntity> activityEntity;
+    private List<ActivityEntity> activityEntity;*/
 }

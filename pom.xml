@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.crossasyst</groupId>
-    <artifactId>activities</artifactId>
+    <artifactId>tracking-database</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Activities</name>
-    <description>Demo project for Spring Boot</description>
+    <name>tracking-database</name>
+    <description>Spring boot project for tracking database</description>
     <properties>
         <java.version>11</java.version>
         <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
