@@ -12,13 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 
 @Tag(name = "create-data-jobs", description = "Create data jobs")
 @RequestMapping(path = "v1")
@@ -43,6 +39,18 @@ public class DataJobController {
         DataJobResponse dataJobResponse = dataJobService.createJob(dataJob);
 
         return new ResponseEntity<>(dataJobResponse, HttpStatus.OK);
+    }
+
+    @ApiResponse(responseCode = "200", description = "Success")
+    @ApiResponse(responseCode = "400", description = "Invalid request")
+    @ApiResponse(responseCode = "404", description = "Not found")
+    @ApiResponse(responseCode = "500", description = "System error")
+    @PutMapping(path = "/datajobs/{datajobGuid}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DataJob> updateJob(@PathVariable String datajobGuid, @RequestBody @Valid DataJob dataJob){
+
+        dataJob=dataJobService.updateJob(datajobGuid, dataJob);
+
+        return new ResponseEntity<>(dataJob,HttpStatus.OK);
     }
 
 

@@ -24,7 +24,10 @@ public class DataJobEntity {
     @Column(name = "job_direction")
     private String jobDirection;
 
+    @Transient
     UUID uuid = UUID.randomUUID();
+
+    @Column(name = "data_job_guid")
     private String dataJobGUID = uuid.toString();
 
     @Column(name = "input_file_name")

@@ -3,11 +3,11 @@ package com.crossasyst.trackingdatabase.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -22,8 +22,9 @@ public class MessageEntity {
     @Column(name = "msg_Id")
     private Long msgId;
 
-    @Column(name = "data_job_guid")
-    private String dataJobGuid;
+    @Transient
+    UUID uuid=UUID.randomUUID();
+    private UUID dataJobGuid= UUID.fromString(uuid.toString());
 
     @Column(name = "log_session_id")
     private String logSessionId;
@@ -46,8 +47,7 @@ public class MessageEntity {
     @Column(name = "message_type")
     private String messageType;
 
-    @Column(name = "message_guid")
-    private String messageGuid;
+    private UUID messageGuid= UUID.fromString(uuid.toString());
 
     @Column(name = "previous_message_guid")
     private String previousMessageGuid;

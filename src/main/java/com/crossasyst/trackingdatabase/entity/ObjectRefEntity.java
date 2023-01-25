@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,8 @@ import javax.persistence.*;
 public class ObjectRefEntity {
 
     @Id
+    @SequenceGenerator(name = "obj_ref_seq_id", sequenceName = "obj_ref_seq_id", initialValue = 2000, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "obj_ref_seq_id")
     @Column(name = "object_ref_id")
     private Long objectRefId;
 
@@ -26,9 +29,8 @@ public class ObjectRefEntity {
     @Column(name = "revision")
     private Integer revision;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "message_entity_msg_id", nullable = false)
+    @JoinColumn(name = "message_entity_msg_id", nullable = true)
     private MessageEntity messageEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

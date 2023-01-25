@@ -1,9 +1,11 @@
 package com.crossasyst.trackingdatabase.model;
 
 import com.crossasyst.trackingdatabase.entity.NodeTypeEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,6 +13,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Validated
 public class ObjectRef {
 
     @NotBlank(message = "Object ref should not be empty or null")
@@ -21,7 +24,8 @@ public class ObjectRef {
 
     private Integer revision;
 
-    //private Message message;
+    @JsonIgnore
+    private Message message;
 
-    private NodeTypeEntity nodeTypeEntity;
+    private NodeType nodeType;
 }

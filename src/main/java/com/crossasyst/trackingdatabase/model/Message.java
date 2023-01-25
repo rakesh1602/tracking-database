@@ -3,20 +3,23 @@ package com.crossasyst.trackingdatabase.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Validated
 public class Message {
 
     @NotBlank(message = "Data job guid should not be empty or null")
-    private String dataJobGuid;
+    private UUID dataJobGuid;
 
     @NotBlank(message = "Log session id should not be empty or null ")
     private String logSessionId;
@@ -36,14 +39,12 @@ public class Message {
     @Size(max = 50, message = "Exception maximum size 50 character")
     private String exceptionMessage;
 
-
     @NotBlank(message = "Message type should not be empty or null")
     @Size(max = 20, message = "Message type maximum size 20 character")
     private String messageType;
 
-
     @NotBlank(message = "Message Guid should not be empty or null")
-    private String messageGuid;
+    private UUID messageGuid;
 
     @NotBlank(message = "Previous message Guid should not be empty or null")
     private String previousMessageGuid;

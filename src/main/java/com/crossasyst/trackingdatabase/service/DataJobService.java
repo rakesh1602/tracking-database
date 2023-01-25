@@ -9,6 +9,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Log4j2
 public class DataJobService {
@@ -37,4 +39,42 @@ public class DataJobService {
 
         return dataJobResponse;
     }
+
+    public DataJob updateJob(String datajobGuid, DataJob dataJob) {
+
+        Optional<DataJobEntity> optionalDataJobEntity = dataJobRepository.findByGuid(datajobGuid);
+
+        DataJobEntity dataJobEntity = new DataJobEntity();
+        if (optionalDataJobEntity.isPresent()) {
+
+            log.info("Data job found with dataJobGuid {}", datajobGuid);
+
+            optionalDataJobEntity.get().setJobDirection(dataJob.getJobDirection());
+            optionalDataJobEntity.get().setDataJobGUID(dataJob.getDataJobGuid());
+            optionalDataJobEntity.get().setInputFileName(dataJob.getInputFileName());
+            optionalDataJobEntity.get().setProcessingStartDt(dataJob.getProcessingStartDt());
+            optionalDataJobEntity.get().setProcessingEndDt(dataJob.getProcessingEndDt());
+            optionalDataJobEntity.get().setDataFeed(dataJob.getDataFeed());
+            optionalDataJobEntity.get().setDataSource(dataJob.getDataSource());
+            optionalDataJobEntity.get().setDataPartner(dataJob.getDataPartner());
+            optionalDataJobEntity.get().setMsgType(dataJob.getMsgType());
+            optionalDataJobEntity.get().setJobType(dataJob.getJobType());
+            optionalDataJobEntity.get().setExternalSystemName(dataJob.getExternalSystemName());
+            optionalDataJobEntity.get().setOrgId(dataJob.getOrgId());
+            optionalDataJobEntity.get().setOrgUuid(dataJob.getOrgUuid());
+            dataJobRepository.save(optionalDataJobEntity.get());
+
+            log.info("Data job updated");
+
+
+            /*dataJobEntity = dataJobMapper.modelToEntity(dataJob);
+            dataJobRepository.save(dataJobEntity);*/
+
+        } else {
+            log.info("Data job not found with dataJobGuid {}", datajobGuid);
+        }
+
+        return dataJob;
+    }
+
 }

@@ -12,4 +12,10 @@ public interface ActivityMapper {
     @Mapping(source = "activityType",target = "activityTypeEntity")
     @Mapping(source = "processingStatusType",target = "processingStatusTypeEntity")
     ActivityEntity modelToEntity(Activity activity);
+
+
+    @Mapping(target = "message",source = "messageEntity")
+    @Mapping(target = "activityType",source = "activityTypeEntity")
+    @Mapping(target = "processingStatusType",source = "processingStatusTypeEntity")
+    Activity entityToModel(ActivityEntity activityEntity);
 }

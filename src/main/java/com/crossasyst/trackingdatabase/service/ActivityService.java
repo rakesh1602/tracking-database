@@ -9,6 +9,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Log4j2
 public class ActivityService {
@@ -36,5 +38,42 @@ public class ActivityService {
 
         return activityResponse;
 
+    }
+
+    public Activity updateActivity(Integer activityId, Activity activity) {
+
+        Optional<ActivityEntity> optionalActivityEntity=activityRepository.findById(activityId);
+
+        if(optionalActivityEntity.isPresent()){
+            log.info("Activity id found");
+
+            optionalActivityEntity.get().setActivityName(activity.getActivityName());
+            optionalActivityEntity.get().setProcessingStartDate(activity.getProcessingStartDate());
+            optionalActivityEntity.get().setProcessingEndDate(activity.getProcessingEndDate());
+            optionalActivityEntity.get().setRevision(activity.getRevision());
+
+            activityRepository.save(optionalActivityEntity.get());
+
+            log.info("Activity updated");
+        } else {
+            log.info("Activity id not found");
+        }
+        return activity;
+    }
+
+    public Activity searchActivities(Long messageId) {
+
+        Optional<ActivityEntity> optionalActivityEntity=activityRepository.findByMessageId(messageId);
+
+        Activity activity=new Activity();
+
+        if(optionalActivityEntity.isPresent()){
+           activity=activityMapper.entityToModel(optionalActivityEntity.get());
+            log.info("Found activities with message id {}", messageId);
+
+        } else{
+            log.info("Activity not found with the message id{}",messageId);
+        }
+        return  activity;
     }
 }
