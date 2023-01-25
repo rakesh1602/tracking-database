@@ -1,6 +1,9 @@
 package com.crossasyst.trackingdatabase.service;
 
 import com.crossasyst.trackingdatabase.entity.ActivityEntity;
+import com.crossasyst.trackingdatabase.entity.ActivityTypeEntity;
+import com.crossasyst.trackingdatabase.entity.MessageEntity;
+import com.crossasyst.trackingdatabase.entity.ProcessingStatusTypeEntity;
 import com.crossasyst.trackingdatabase.mapper.ActivityMapper;
 import com.crossasyst.trackingdatabase.model.Activity;
 import com.crossasyst.trackingdatabase.repository.ActivityRepository;
@@ -29,18 +32,18 @@ public class ActivityService {
 
         log.info("Create activity");
 
-        ActivityEntity activityEntity=activityMapper.modelToEntity(activity);
+        ActivityEntity activityEntity = activityMapper.modelToEntity(activity);
         activityRepository.save(activityEntity);
         log.info("Activity details saved successfully.");
 
-        ActivityResponse activityResponse=new ActivityResponse();
+        ActivityResponse activityResponse = new ActivityResponse();
         activityResponse.setActivityId(activityEntity.getActivityId());
 
         return activityResponse;
 
     }
 
-    public Activity updateActivity(Integer activityId, Activity activity) {
+  /*  public Activity updateActivity(Integer activityId, Activity activity) {
 
         Optional<ActivityEntity> optionalActivityEntity=activityRepository.findById(activityId);
 
@@ -59,21 +62,48 @@ public class ActivityService {
             log.info("Activity id not found");
         }
         return activity;
-    }
+    }*/
+
 
     public Activity searchActivities(Long messageId) {
 
-        Optional<ActivityEntity> optionalActivityEntity=activityRepository.findByMessageId(messageId);
+        Optional<ActivityEntity> optionalActivityEntity = activityRepository.findByMessageId(messageId);
 
-        Activity activity=new Activity();
+        Activity activity = new Activity();
 
-        if(optionalActivityEntity.isPresent()){
-           activity=activityMapper.entityToModel(optionalActivityEntity.get());
+        if (optionalActivityEntity.isPresent()) {
+            activity = activityMapper.entityToModel(optionalActivityEntity.get());
             log.info("Found activities with message id {}", messageId);
 
-        } else{
-            log.info("Activity not found with the message id{}",messageId);
+        } else {
+            log.info("Activity not found with the message id{}", messageId);
         }
-        return  activity;
+        return activity;
+    }
+
+    public Activity updateActivity(Integer activityId, Activity activity) {
+        ActivityEntity activityEntity = activityRepository.findById(activityId).get();
+
+        Integer entityActivityId=activityEntity.getActivityId();
+
+        ActivityTypeEntity activityTypeEntity=activityEntity.getActivityTypeEntity();
+        String activityTypeCd=activityTypeEntity.getActivityTypeCd();
+
+        MessageEntity messageEntity=activityEntity.getMessageEntity();
+        Long msgId=messageEntity.getMsgId();
+
+        ProcessingStatusTypeEntity processingStatusTypeEntity=activityEntity.getProcessingStatusTypeEntity();
+        String processingTypeCd= processingStatusTypeEntity.getProcessingStatusTypeCd();
+
+        activityEntity = activityMapper.modelToEntity(activity);
+        activityEntity.setActivityId(entityActivityId);
+        activityEntity.getActivityTypeEntity().setActivityTypeCd(activityTypeCd);
+        activityEntity.getMessageEntity().setMsgId(msgId);
+        activityEntity.getProcessingStatusTypeEntity().setProcessingStatusTypeCd(processingTypeCd);
+        activityRepository.save(activityEntity);
+        log.info("Updated");
+
+        return activity;
+
     }
 }

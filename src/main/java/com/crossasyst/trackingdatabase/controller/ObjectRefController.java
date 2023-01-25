@@ -32,7 +32,7 @@ public class ObjectRefController {
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
-    @PostMapping(path = "/object-refs", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/object-refs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ObjectRefResponse> createObjectRef(@RequestBody ObjectRef objectRef) {
 
        ObjectRefResponse objectRefResponse=objectRefService.createObjectRef(objectRef);

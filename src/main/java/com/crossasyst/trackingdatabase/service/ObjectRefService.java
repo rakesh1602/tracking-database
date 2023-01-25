@@ -1,6 +1,5 @@
 package com.crossasyst.trackingdatabase.service;
 
-import com.crossasyst.trackingdatabase.entity.MessageEntity;
 import com.crossasyst.trackingdatabase.entity.ObjectRefEntity;
 import com.crossasyst.trackingdatabase.mapper.ObjectRefMapper;
 import com.crossasyst.trackingdatabase.model.Message;
@@ -31,10 +30,6 @@ public class ObjectRefService {
         log.info("Create object ref");
 
         ObjectRefEntity objectRefEntity=objectRefMapper.modelToEntity(objectRef);
-
-        MessageEntity messageEntity=new MessageEntity();
-        messageEntity.setMsgId(messageEntity.getMsgId());
-
         objectRefRepository.save(objectRefEntity);
 
         log.info("Object ref saved successfully.");

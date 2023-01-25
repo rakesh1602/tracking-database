@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 @Tag(name = "Create message", description = "Create message")
 @RequestMapping(path = "v1")
@@ -24,8 +23,7 @@ public class MessageController {
     private final MessageRepository messageRepository;
 
     @Autowired
-    public MessageController(MessageService messageService,
-                             MessageRepository messageRepository) {
+    public MessageController(MessageService messageService, MessageRepository messageRepository) {
         this.messageService = messageService;
         this.messageRepository = messageRepository;
     }
@@ -48,10 +46,10 @@ public class MessageController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @PutMapping(path = "/messages/{messageGuid}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Message> updateMessage(@PathVariable UUID messageGuid, @RequestBody Message message){
+    public ResponseEntity<Message> updateMessage(@PathVariable String messageGuid, @RequestBody @Valid Message message) {
 
-       message=messageService.updateMsg(messageGuid, message);
+        message = messageService.updateMsg(messageGuid, message);
 
-        return new ResponseEntity<>(message,HttpStatus.OK);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

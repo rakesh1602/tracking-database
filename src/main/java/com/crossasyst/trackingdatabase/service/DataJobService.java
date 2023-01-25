@@ -1,6 +1,8 @@
 package com.crossasyst.trackingdatabase.service;
 
+import com.crossasyst.trackingdatabase.entity.DataChannelEntity;
 import com.crossasyst.trackingdatabase.entity.DataJobEntity;
+import com.crossasyst.trackingdatabase.entity.JobStatusTypeEntity;
 import com.crossasyst.trackingdatabase.mapper.DataJobMapper;
 import com.crossasyst.trackingdatabase.model.DataJob;
 import com.crossasyst.trackingdatabase.repository.DataJobRepository;
@@ -42,6 +44,30 @@ public class DataJobService {
 
     public DataJob updateJob(String datajobGuid, DataJob dataJob) {
 
+        DataJobEntity dataJobEntity=dataJobRepository.findByDataJobGuid(datajobGuid);
+        Long dataJobId= dataJobEntity.getDataJobId();
+
+        DataChannelEntity dataChannelEntity=dataJobEntity.getDataChannelEntity();
+        String dataChannelCd=dataChannelEntity.getDataChannelCd();
+
+        JobStatusTypeEntity jobStatusTypeEntity=dataJobEntity.getJobStatusTypeEntity();
+        String jobStatusTypeCd=jobStatusTypeEntity.getJobStatusType();
+
+        DataJobEntity newDataJobEntity=dataJobMapper.modelToEntity(dataJob);
+        newDataJobEntity.setDataJobId(dataJobId);
+        newDataJobEntity.getDataChannelEntity().setDataChannelCd(dataChannelCd);
+        newDataJobEntity.getJobStatusTypeEntity().setJobStatusType(jobStatusTypeCd);
+        dataJobRepository.save(newDataJobEntity);
+
+        log.info("Updated");
+
+        return dataJob;
+
+
+    }
+
+    /*public DataJob updateJob(String datajobGuid, DataJob dataJob) {
+
         Optional<DataJobEntity> optionalDataJobEntity = dataJobRepository.findByGuid(datajobGuid);
 
         DataJobEntity dataJobEntity = new DataJobEntity();
@@ -67,14 +93,14 @@ public class DataJobService {
             log.info("Data job updated");
 
 
-            /*dataJobEntity = dataJobMapper.modelToEntity(dataJob);
-            dataJobRepository.save(dataJobEntity);*/
+            *//*dataJobEntity = dataJobMapper.modelToEntity(dataJob);
+            dataJobRepository.save(dataJobEntity);*//*
 
         } else {
             log.info("Data job not found with dataJobGuid {}", datajobGuid);
         }
 
         return dataJob;
-    }
+    }*/
 
 }

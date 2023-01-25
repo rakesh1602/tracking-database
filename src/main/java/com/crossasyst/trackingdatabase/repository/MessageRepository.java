@@ -11,6 +11,8 @@ import java.util.UUID;
 @Repository
 public interface MessageRepository extends CrudRepository<MessageEntity, Long> {
 
-    @Query(value = "select m from MessageEntity m where m.messageGuid=?1")
-    Optional<MessageEntity> findByGuid(UUID messageGuid);
+   /* @Query(value = "select m from MessageEntity m where m.messageGuid=?1")
+    Optional<MessageEntity> findByGuid(String messageGuid);*/
+
+    MessageEntity findByMessageGuid(String messageGuid);
 }

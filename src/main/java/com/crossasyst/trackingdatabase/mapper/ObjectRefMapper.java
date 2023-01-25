@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 public interface ObjectRefMapper {
 
     @Mapping(source = "nodeType", target = "nodeTypeEntity")
-    //@Mapping(source = "message", target = "messageEntity")
+    @Mapping(source = "message", target = "messageEntity")
     ObjectRefEntity modelToEntity(ObjectRef objectRef);
 }

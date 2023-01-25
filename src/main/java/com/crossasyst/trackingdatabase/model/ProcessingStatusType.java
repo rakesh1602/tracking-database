@@ -25,5 +25,5 @@ public class ProcessingStatusType {
 
     /*private List<Activity> activityList;*/
 
-   // private List<Message> messageList;
+   //private List<Message> messageList;
 }

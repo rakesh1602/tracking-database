@@ -1,6 +1,7 @@
 package com.crossasyst.trackingdatabase.service;
 
 import com.crossasyst.trackingdatabase.entity.MessageEntity;
+import com.crossasyst.trackingdatabase.entity.ProcessingStatusTypeEntity;
 import com.crossasyst.trackingdatabase.mapper.MessageMapper;
 import com.crossasyst.trackingdatabase.model.Message;
 import com.crossasyst.trackingdatabase.repository.MessageRepository;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Log4j2
@@ -36,14 +36,31 @@ public class MessageService {
 
         MessageResponse messageResponse=new MessageResponse();
         messageResponse.setMessageId(messageEntity.getMsgId());
-        messageResponse.setMessageGuid(String.valueOf(messageEntity.getMessageGuid()));
+        messageResponse.setMessageGuid(messageEntity.getMessageGuid());
 
         return messageResponse;
 
     }
 
+    public Message updateMsg(String messageGuid, Message message) {
 
-    public Message updateMsg(UUID messageGuid, Message message) {
+        MessageEntity messageEntity=messageRepository.findByMessageGuid(messageGuid);
+        Long msgId=messageEntity.getMsgId();
+        ProcessingStatusTypeEntity processingStatusTypeEntity=messageEntity.getProcessingStatusTypeEntity();
+        String processingStatusTypeCd= processingStatusTypeEntity.getProcessingStatusTypeCd();
+
+        MessageEntity newMessageEntity=messageMapper.modelToEntity(message);
+        newMessageEntity.setMsgId(msgId);
+        messageEntity.getProcessingStatusTypeEntity().setProcessingStatusTypeCd(processingStatusTypeCd);
+        messageRepository.save(newMessageEntity);
+
+        return message;
+
+
+    }
+
+
+    /*public Message updateMsg(String messageGuid, Message message) {
 
         Optional<MessageEntity> optionalMessageEntity=messageRepository.findByGuid(messageGuid);
 
@@ -57,7 +74,7 @@ public class MessageService {
             optionalMessageEntity.get().setSubjectId(message.getSubjectId());
             optionalMessageEntity.get().setExceptionMessage(message.getExceptionMessage());
             optionalMessageEntity.get().setMessageType(message.getMessageType());
-            optionalMessageEntity.get().setMessageGuid(message.getMessageGuid());
+            optionalMessageEntity.get().setMessageGuid(message.getPreviousMessageGuid());
             optionalMessageEntity.get().setPreviousMessageGuid(message.getPreviousMessageGuid());
             optionalMessageEntity.get().setExternalPatientId(message.getExternalPatientId());
             optionalMessageEntity.get().setPortalConsumerId(message.getPortalConsumerId());
@@ -78,5 +95,6 @@ public class MessageService {
 
         return message;
 
-    }
+    }*/
+
 }

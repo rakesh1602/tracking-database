@@ -46,7 +46,7 @@ public class ActivityController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @PutMapping(path = "/activities/{activityId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Activity> updateMessage(@PathVariable Integer activityId, @RequestBody @Valid Activity activity){
+    public ResponseEntity<Activity> updateActivity(@PathVariable Integer activityId, @RequestBody @Valid Activity activity){
 
         activity=activityService.updateActivity(activityId,activity);
 
@@ -58,7 +58,7 @@ public class ActivityController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @GetMapping(path = "/activities/{messageId}")
-    public ResponseEntity<Activity> updateMessage(@RequestParam (name = "messageId") Long messageId){
+    public ResponseEntity<Activity> searchActivities(@RequestParam (name = "messageId") Long messageId){
 
        Activity activity=activityService.searchActivities(messageId);
 

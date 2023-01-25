@@ -29,8 +29,8 @@ public class ObjectRefEntity {
     @Column(name = "revision")
     private Integer revision;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "message_entity_msg_id", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "message_entity_msg_id")
     private MessageEntity messageEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

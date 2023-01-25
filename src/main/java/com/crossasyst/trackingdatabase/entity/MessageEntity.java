@@ -3,7 +3,6 @@ package com.crossasyst.trackingdatabase.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,9 +21,8 @@ public class MessageEntity {
     @Column(name = "msg_Id")
     private Long msgId;
 
-    @Transient
-    UUID uuid=UUID.randomUUID();
-    private UUID dataJobGuid= UUID.fromString(uuid.toString());
+    @Column(name = "data_job_guid")
+    private String dataJobGuid;
 
     @Column(name = "log_session_id")
     private String logSessionId;
@@ -47,7 +45,9 @@ public class MessageEntity {
     @Column(name = "message_type")
     private String messageType;
 
-    private UUID messageGuid= UUID.fromString(uuid.toString());
+    @Transient
+    UUID uuid=UUID.randomUUID();
+    private String messageGuid =uuid.toString();
 
     @Column(name = "previous_message_guid")
     private String previousMessageGuid;
@@ -79,10 +79,10 @@ public class MessageEntity {
     @Column(name = "error_severity")
     private String errorSeverity;
 
-   /* @OneToMany(mappedBy = "messageEntity")
-    private List<ActivityEntity> activityEntity;
-*/
-   /* @OneToMany(mappedBy = "messageEntity")
+    /* @OneToMany(mappedBy = "messageEntity")
+     private List<ActivityEntity> activityEntity;
+ */
+    /*@OneToMany(mappedBy = "messageEntity")
     private List<ObjectRefEntity> objectRefEntity;*/
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

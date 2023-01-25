@@ -24,7 +24,6 @@ public class ObjectRef {
 
     private Integer revision;
 
-    @JsonIgnore
     private Message message;
 
     private NodeType nodeType;
