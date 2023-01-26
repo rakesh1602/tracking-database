@@ -15,6 +15,6 @@ public interface ProcessingStatusTypeRepository extends CrudRepository<Processin
 
     //@Query(value = "select a from ActivityEntity a Left join Fetch a.messageEntity where a.messageEntity.msgId=?1")
    // @Query(value = "select a from ProcessingStatusTypeEntity a Left join fetch a.messageEntity where a.messageEntity.dataJobGuid=?1")
-    @Query(value = "select p from ProcessingStatusTypeEntity p join p.messageEntity m where m.dataJobGuid=?1 ")
+    @Query(value = "select p from ProcessingStatusTypeEntity p join p.messageEntity m where m.dataJobGUID=?1 ")
     Optional<ProcessingStatusTypeEntity> findByDataJobGuid(String dataJobGuid);
 }

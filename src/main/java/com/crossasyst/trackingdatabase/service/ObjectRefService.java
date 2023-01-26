@@ -12,6 +12,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Log4j2
 public class ObjectRefService {
@@ -65,5 +67,16 @@ public class ObjectRefService {
 
         return objectRef;
 
+    }
+
+    public void patchObjectRefById(ObjectRef patchObjectRef, Long objectRefId) {
+        Optional<ObjectRefEntity> objectRefEntityOptional=objectRefRepository.findById(objectRefId);
+        if(objectRefEntityOptional.isPresent()){
+            objectRefEntityOptional.get().setObjectRef(patchObjectRef.getObjectRef());
+            objectRefRepository.save(objectRefEntityOptional.get());
+            log.info("Patch object ref id {}",objectRefId);
+        } else {
+            log.info("Object id {} not found", objectRefId);
+        }
     }
 }

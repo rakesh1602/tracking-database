@@ -1,6 +1,7 @@
 package com.crossasyst.trackingdatabase.controller;
 
 
+import com.crossasyst.trackingdatabase.model.Activity;
 import com.crossasyst.trackingdatabase.model.DataChannel;
 import com.crossasyst.trackingdatabase.model.DataJob;
 import com.crossasyst.trackingdatabase.model.JobStatusType;

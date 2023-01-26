@@ -37,7 +37,7 @@ public class DataJobService {
 
         DataJobResponse dataJobResponse = new DataJobResponse();
         dataJobResponse.setDataJobID(dataJobEntity.getDataJobId());
-        dataJobResponse.setDataJobGUID(dataJobEntity.getDataJobGUID());
+        dataJobResponse.setDataJobGuid(dataJobEntity.getDataJobGUID());
 
         return dataJobResponse;
     }

@@ -1,6 +1,8 @@
 package com.crossasyst.trackingdatabase.entity;
 
 import com.crossasyst.trackingdatabase.entity.base.BaseEntity;
+import com.crossasyst.trackingdatabase.utils.UUIDGenerator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +25,10 @@ public class MessageEntity extends BaseEntity {
     private Long msgId;
 
     @Transient
-    UUID uuid=UUID.randomUUID();
-    private String dataJobGuid=uuid.toString();
+    UUIDGenerator uuidGenerator=new UUIDGenerator();
+
+    @Column(name = "data_job_guid")
+    private String dataJobGUID;
 
     @Column(name = "log_session_id")
     private String logSessionId;

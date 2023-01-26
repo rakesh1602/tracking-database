@@ -11,5 +11,5 @@ public class DataJobResponse {
 
     private Long dataJobID;
 
-    private String dataJobGUID;
+    private String dataJobGuid;
 }

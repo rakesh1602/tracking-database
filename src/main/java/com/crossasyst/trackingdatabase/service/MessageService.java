@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.service;
 
+import com.crossasyst.trackingdatabase.entity.DataJobEntity;
 import com.crossasyst.trackingdatabase.entity.MessageEntity;
 import com.crossasyst.trackingdatabase.entity.ProcessingStatusTypeEntity;
 import com.crossasyst.trackingdatabase.mapper.MessageMapper;
@@ -30,11 +31,12 @@ public class MessageService {
 
         log.info("Create Message");
 
-        MessageEntity messageEntity=messageMapper.modelToEntity(message);
+        MessageEntity messageEntity = messageMapper.modelToEntity(message);
         messageRepository.save(messageEntity);
         log.info("Message saved successfully.");
 
-        MessageResponse messageResponse=new MessageResponse();
+
+        MessageResponse messageResponse = new MessageResponse();
         messageResponse.setMessageId(messageEntity.getMsgId());
         messageResponse.setMessageGuid(messageEntity.getMessageGuid());
 
@@ -44,12 +46,12 @@ public class MessageService {
 
     public Message updateMsg(String messageGuid, Message message) {
 
-        MessageEntity messageEntity=messageRepository.findByMessageGuid(messageGuid);
-        Long msgId=messageEntity.getMsgId();
-        ProcessingStatusTypeEntity processingStatusTypeEntity=messageEntity.getProcessingStatusTypeEntity();
-        String processingStatusTypeCd= processingStatusTypeEntity.getProcessingStatusTypeCd();
+        MessageEntity messageEntity = messageRepository.findByMessageGuid(messageGuid);
+        Long msgId = messageEntity.getMsgId();
+        ProcessingStatusTypeEntity processingStatusTypeEntity = messageEntity.getProcessingStatusTypeEntity();
+        String processingStatusTypeCd = processingStatusTypeEntity.getProcessingStatusTypeCd();
 
-        MessageEntity newMessageEntity=messageMapper.modelToEntity(message);
+        MessageEntity newMessageEntity = messageMapper.modelToEntity(message);
         newMessageEntity.setMsgId(msgId);
         messageEntity.getProcessingStatusTypeEntity().setProcessingStatusTypeCd(processingStatusTypeCd);
         messageRepository.save(newMessageEntity);

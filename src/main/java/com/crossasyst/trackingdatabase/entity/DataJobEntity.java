@@ -2,6 +2,7 @@ package com.crossasyst.trackingdatabase.entity;
 
 import com.crossasyst.trackingdatabase.entity.base.BaseEntity;
 import com.crossasyst.trackingdatabase.model.base.Base;
+import com.crossasyst.trackingdatabase.utils.UUIDGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,10 +28,10 @@ public class DataJobEntity extends BaseEntity {
     private String jobDirection;
 
     @Transient
-    UUID uuid = UUID.randomUUID();
+    UUIDGenerator uuidGenerator=new UUIDGenerator();
 
     @Column(name = "data_job_guid")
-    private String dataJobGUID = uuid.toString();
+    private String dataJobGUID= uuidGenerator.getDataJobGuid();
 
     @Column(name = "input_file_name")
     private String inputFileName;

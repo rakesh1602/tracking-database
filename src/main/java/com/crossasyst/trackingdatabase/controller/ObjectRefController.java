@@ -32,8 +32,8 @@ public class ObjectRefController {
     @PostMapping(path = "/object-refs", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ObjectRefResponse> createObjectRef(@RequestBody ObjectRef objectRef) {
 
-       ObjectRefResponse objectRefResponse=objectRefService.createObjectRef(objectRef);
-       return new ResponseEntity<>(objectRefResponse, HttpStatus.OK);
+        ObjectRefResponse objectRefResponse = objectRefService.createObjectRef(objectRef);
+        return new ResponseEntity<>(objectRefResponse, HttpStatus.OK);
     }
 
     @ApiResponse(responseCode = "200", description = "Success")
@@ -41,9 +41,19 @@ public class ObjectRefController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @PutMapping(path = "/object-refs/{objectRefId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ObjectRef> updateObjectRef(@PathVariable Long objectRefId , @RequestBody ObjectRef objectRef) {
+    public ResponseEntity<ObjectRef> updateObjectRef(@PathVariable Long objectRefId, @RequestBody ObjectRef objectRef) {
 
-        objectRef=objectRefService.updateObjectRef(objectRefId,objectRef);
+        objectRef = objectRefService.updateObjectRef(objectRefId, objectRef);
         return new ResponseEntity<>(objectRef, HttpStatus.OK);
+    }
+
+    @ApiResponse(responseCode = "200", description = "Success")
+    @ApiResponse(responseCode = "400", description = "Invalid request")
+    @ApiResponse(responseCode = "404", description = "Not found")
+    @ApiResponse(responseCode = "500", description = "System error")
+    @PatchMapping(path = "/object-refs/{objectRefId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ObjectRef> patchObjectRefById( @PathVariable Long objectRefId,@RequestBody ObjectRef patchObjectRef) {
+        objectRefService.patchObjectRefById(patchObjectRef, objectRefId);
+        return ResponseEntity.ok().build();
     }
 }

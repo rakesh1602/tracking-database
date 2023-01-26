@@ -1,6 +1,8 @@
 package com.crossasyst.trackingdatabase.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class ProcessingStatusType {
 
     /*private List<Activity> activityList;*/
 
-    @JsonIgnore
     private List<Message> messageList;
+
+
 }
