@@ -27,9 +27,9 @@ public class ProcessingStatusTypeController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @GetMapping(path = "/datajobs/{datajobGuid}/processing-status")
-    public ResponseEntity<ProcessingStatusType> getProcessingType(@RequestParam(name = "datajobGuid") String datajobGuid){
+    public ResponseEntity<ProcessingStatusType> getProcessingType(@RequestParam(name = "datajobGuid") String dataJobGuid){
 
-        ProcessingStatusType processingStatusType=processingStatusTypeService.getProcessingStatus(datajobGuid);
+        ProcessingStatusType processingStatusType=processingStatusTypeService.getProcessingStatus(dataJobGuid);
 
         return new ResponseEntity<>(processingStatusType, HttpStatus.OK);
     }

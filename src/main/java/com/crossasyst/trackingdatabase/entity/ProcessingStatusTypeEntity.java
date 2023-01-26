@@ -30,6 +30,6 @@ public class ProcessingStatusTypeEntity {
     /*@OneToMany(mappedBy = "processingStatusTypeEntity")
     private List<ActivityEntity> activityEntity;*/
 
-   /* @OneToMany(mappedBy = "processingStatusTypeEntity")
-    private List<MessageEntity> messageEntity;*/
+    @OneToMany(mappedBy = "processingStatusTypeEntity")
+    private List<MessageEntity> messageEntity;
 }

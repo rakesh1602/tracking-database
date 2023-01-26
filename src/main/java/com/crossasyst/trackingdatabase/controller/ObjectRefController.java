@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Create object ref", description = "Create object red")
 @RequestMapping(path = "v1")
@@ -37,5 +34,16 @@ public class ObjectRefController {
 
        ObjectRefResponse objectRefResponse=objectRefService.createObjectRef(objectRef);
        return new ResponseEntity<>(objectRefResponse, HttpStatus.OK);
+    }
+
+    @ApiResponse(responseCode = "200", description = "Success")
+    @ApiResponse(responseCode = "400", description = "Invalid request")
+    @ApiResponse(responseCode = "404", description = "Not found")
+    @ApiResponse(responseCode = "500", description = "System error")
+    @PutMapping(path = "/object-refs/{objectRefId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ObjectRef> updateObjectRef(@PathVariable Long objectRefId , @RequestBody ObjectRef objectRef) {
+
+        objectRef=objectRefService.updateObjectRef(objectRefId,objectRef);
+        return new ResponseEntity<>(objectRef, HttpStatus.OK);
     }
 }

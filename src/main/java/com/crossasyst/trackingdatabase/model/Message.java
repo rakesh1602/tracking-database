@@ -18,9 +18,9 @@ import java.util.UUID;
 @Validated
 public class Message {
 
-    @NotBlank(message = "Data job Guid should not be empty or null")
+    /*@NotBlank(message = "Data job Guid should not be empty or null")
     @Size(max = 10, message = "Data job Guid maximum size 10 character")
-    private String dataJobGuid;
+    private String dataJobGuid;*/
 
     @NotBlank(message = "Log session id should not be empty or null ")
     private String logSessionId;
@@ -47,8 +47,8 @@ public class Message {
     /*@NotBlank(message = "Message Guid should not be empty or null")
     private String messageGuid;*/
 
-    @NotBlank(message = "Previous message Guid should not be empty or null")
-    private String previousMessageGuid;
+    /*@NotBlank(message = "Previous message Guid should not be empty or null")
+    private String previousMessageGuid;*/
 
     @NotBlank(message = "External patient id should not be empty or null")
     private String externalPatientId;

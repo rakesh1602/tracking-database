@@ -5,9 +5,11 @@ import com.crossasyst.trackingdatabase.model.ProcessingStatusType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ProcessingStatusTypeMapper {
 
-   /* @Mapping(source = "messageEntity", target = "messageList")*/
+    @Mapping(source = "messageEntity", target = "messageList")
     ProcessingStatusType entityToModel(ProcessingStatusTypeEntity processingStatusTypeEntity);
 }

@@ -21,8 +21,9 @@ public class MessageEntity {
     @Column(name = "msg_Id")
     private Long msgId;
 
-    @Column(name = "data_job_guid")
-    private String dataJobGuid;
+    @Transient
+    UUID uuid=UUID.randomUUID();
+    private String dataJobGuid=uuid.toString();
 
     @Column(name = "log_session_id")
     private String logSessionId;
@@ -46,11 +47,12 @@ public class MessageEntity {
     private String messageType;
 
     @Transient
-    UUID uuid=UUID.randomUUID();
-    private String messageGuid =uuid.toString();
+    UUID uuid1=UUID.randomUUID();
+    private String messageGuid =uuid1.toString();
 
-    @Column(name = "previous_message_guid")
-    private String previousMessageGuid;
+    @Transient
+    UUID uuid2=UUID.randomUUID();
+    private String previousMessageGuid=uuid2.toString();
 
     @Column(name = "external_patient_id")
     private String externalPatientId;

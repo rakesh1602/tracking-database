@@ -11,4 +11,8 @@ public interface ObjectRefMapper {
     @Mapping(source = "nodeType", target = "nodeTypeEntity")
     @Mapping(source = "message", target = "messageEntity")
     ObjectRefEntity modelToEntity(ObjectRef objectRef);
+
+    @Mapping(source = "nodeTypeEntity" , target = "nodeType" )
+    @Mapping(source = "messageEntity", target ="message" )
+    ObjectRef entityToModel(ObjectRefEntity objectRefEntity);
 }

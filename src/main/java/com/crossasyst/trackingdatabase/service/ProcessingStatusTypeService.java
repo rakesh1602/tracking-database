@@ -24,17 +24,17 @@ public class ProcessingStatusTypeService {
         this.processingStatusTypeMapper = processingStatusTypeMapper;
     }
 
-    public ProcessingStatusType getProcessingStatus(String datajobGuid) {
+    public ProcessingStatusType getProcessingStatus(String dataJobGuid) {
 
-        Optional<ProcessingStatusTypeEntity> optionalProcessingStatusTypeEntity=processingStatusTypeRepository.findByMsgGuid(datajobGuid);
+        Optional<ProcessingStatusTypeEntity> optionalProcessingStatusTypeEntity=processingStatusTypeRepository.findByDataJobGuid(dataJobGuid);
 
         ProcessingStatusType processingStatusType=new ProcessingStatusType();
 
         if(optionalProcessingStatusTypeEntity.isPresent()){
             processingStatusType=processingStatusTypeMapper.entityToModel(optionalProcessingStatusTypeEntity.get());
-            log.info("Data job guid id {} found ",datajobGuid);
+            log.info("Data job guid id {} found ",dataJobGuid);
         } else {
-            log.info("Data job guid id {} not found", datajobGuid);
+            log.info("Data job guid id {} not found", dataJobGuid);
         }
         return processingStatusType;
     }

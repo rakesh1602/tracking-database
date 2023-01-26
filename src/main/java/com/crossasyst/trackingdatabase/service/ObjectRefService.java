@@ -1,5 +1,7 @@
 package com.crossasyst.trackingdatabase.service;
 
+import com.crossasyst.trackingdatabase.entity.MessageEntity;
+import com.crossasyst.trackingdatabase.entity.NodeTypeEntity;
 import com.crossasyst.trackingdatabase.entity.ObjectRefEntity;
 import com.crossasyst.trackingdatabase.mapper.ObjectRefMapper;
 import com.crossasyst.trackingdatabase.model.Message;
@@ -39,6 +41,29 @@ public class ObjectRefService {
 
         return objectRefResponse;
 
+
+    }
+
+    public ObjectRef updateObjectRef(Long objectRefId, ObjectRef objectRef) {
+        ObjectRefEntity objectRefEntity=objectRefRepository.findById(objectRefId).get();
+
+        Long newObjectRefId=objectRefEntity.getObjectRefId();
+
+        MessageEntity messageEntity=new MessageEntity();
+        Long msgId=messageEntity.getMsgId();
+
+        NodeTypeEntity nodeTypeEntity=new NodeTypeEntity();
+        String nodeTypeCd= nodeTypeEntity.getNodeTypeCd();
+
+        objectRefEntity=objectRefMapper.modelToEntity(objectRef);
+        objectRefEntity.setObjectRefId(newObjectRefId);
+        objectRefEntity.getMessageEntity().setMsgId(msgId);
+        objectRefEntity.getNodeTypeEntity().setNodeTypeCd(nodeTypeCd);
+        objectRefRepository.save(objectRefEntity);
+
+        log.info("Updated");
+
+        return objectRef;
 
     }
 }
