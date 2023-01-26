@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.model;
 
+import com.crossasyst.trackingdatabase.model.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class DataJob {
+public class DataJob extends Base {
 
     @NotBlank(message = "Job description should not be empty or null")
     @Size(max = 50, message = "Job description maximum size 50 character")

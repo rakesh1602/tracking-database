@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.model;
 
+import com.crossasyst.trackingdatabase.model.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class Message {
+public class Message extends Base {
 
     /*@NotBlank(message = "Data job Guid should not be empty or null")
     @Size(max = 10, message = "Data job Guid maximum size 10 character")

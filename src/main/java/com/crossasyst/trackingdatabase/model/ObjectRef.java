@@ -1,6 +1,7 @@
 package com.crossasyst.trackingdatabase.model;
 
 import com.crossasyst.trackingdatabase.entity.NodeTypeEntity;
+import com.crossasyst.trackingdatabase.model.base.Base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class ObjectRef {
+public class ObjectRef extends Base {
 
     @NotBlank(message = "Object ref should not be empty or null")
     @Size(max = 10, message = "Object ref maximum size 10 character")

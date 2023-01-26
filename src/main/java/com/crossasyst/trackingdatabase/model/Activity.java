@@ -1,6 +1,7 @@
 package com.crossasyst.trackingdatabase.model;
 
 
+import com.crossasyst.trackingdatabase.model.base.Base;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class Activity {
+public class Activity extends Base {
 
     @NotBlank(message = "Activity name should not be empty or null")
     @Size(max = 20, message = "Activity name maximum size 20 character")

@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.entity;
 
+import com.crossasyst.trackingdatabase.entity.base.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "object_ref")
-public class ObjectRefEntity {
+public class ObjectRefEntity extends BaseEntity {
 
     @Id
     @SequenceGenerator(name = "obj_ref_seq_id", sequenceName = "obj_ref_seq_id", initialValue = 2000, allocationSize = 1)

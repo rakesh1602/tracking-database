@@ -1,5 +1,6 @@
 package com.crossasyst.trackingdatabase.entity;
 
+import com.crossasyst.trackingdatabase.entity.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "activity")
-public class ActivityEntity {
+public class ActivityEntity extends BaseEntity {
     @Id
     @SequenceGenerator(name = "activity_seq_id", sequenceName = "activity_seq_id", initialValue = 1000, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "activity_seq_id")
