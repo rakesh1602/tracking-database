@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +25,4 @@ public class NodeTypeEntity {
 
     @Column(name = "active_bit")
     private Short activeBit;
-
-   /* @OneToMany
-    private List<ObjectRefEntity> objectRefEntity;*/
 }

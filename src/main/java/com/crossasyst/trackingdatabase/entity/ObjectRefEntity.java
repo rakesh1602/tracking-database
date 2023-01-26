@@ -1,7 +1,6 @@
 package com.crossasyst.trackingdatabase.entity;
 
 import com.crossasyst.trackingdatabase.entity.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,5 +36,4 @@ public class ObjectRefEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "node_type_entity_node_type_cd")
     private NodeTypeEntity nodeTypeEntity;
-
 }

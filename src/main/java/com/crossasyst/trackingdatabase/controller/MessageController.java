@@ -37,6 +37,7 @@ public class MessageController {
     public ResponseEntity<MessageResponse> createMessages(@RequestBody @Valid Message message) {
 
         MessageResponse messageResponse = messageService.createMsg(message);
+
         return new ResponseEntity<>(messageResponse, HttpStatus.OK);
     }
 

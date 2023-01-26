@@ -7,7 +7,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +21,4 @@ public class NodeType {
     @NotBlank(message = "Active bit should not be empty or null")
     @Size(max = 10, message = "Active bit maximum size 10 character")
     private Integer activeBit;
-
-    //private List<ObjectRef> objectRefList;
 }

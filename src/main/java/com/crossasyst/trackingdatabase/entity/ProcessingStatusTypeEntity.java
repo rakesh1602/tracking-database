@@ -1,11 +1,9 @@
 package com.crossasyst.trackingdatabase.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-import org.mapstruct.Mapping;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,9 +26,6 @@ public class ProcessingStatusTypeEntity {
 
     @Column(name = "active_bit")
     private Long activeBit;
-
-    /*@OneToMany(mappedBy = "processingStatusTypeEntity")
-    private List<ActivityEntity> activityEntity;*/
 
     @OneToMany(mappedBy = "processingStatusTypeEntity")
     private List<MessageEntity> messageEntity;

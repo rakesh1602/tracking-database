@@ -1,7 +1,6 @@
 package com.crossasyst.trackingdatabase.controller;
 
 import com.crossasyst.trackingdatabase.model.Activity;
-import com.crossasyst.trackingdatabase.model.Message;
 import com.crossasyst.trackingdatabase.response.ActivityResponse;
 import com.crossasyst.trackingdatabase.service.ActivityService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
-
 
 @Tag(name = "Create activity", description = "Create activity")
 @RequestMapping(path = "v1")
@@ -33,9 +30,9 @@ public class ActivityController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @PostMapping(path = "/activities", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<ActivityResponse> createActivity(@RequestBody @Valid Activity activity){
+    private ResponseEntity<ActivityResponse> createActivity(@RequestBody @Valid Activity activity) {
 
-        ActivityResponse activityResponse=activityService.createActivity(activity);
+        ActivityResponse activityResponse = activityService.createActivity(activity);
 
         return new ResponseEntity<>(activityResponse, HttpStatus.OK);
     }
@@ -46,11 +43,11 @@ public class ActivityController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @PutMapping(path = "/activities/{activityId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Activity> updateActivity(@PathVariable Integer activityId, @RequestBody @Valid Activity activity){
+    public ResponseEntity<Activity> updateActivity(@PathVariable Integer activityId, @RequestBody @Valid Activity activity) {
 
-        activity=activityService.updateActivity(activityId,activity);
+        activity = activityService.updateActivity(activityId, activity);
 
-        return new ResponseEntity<>(activity,HttpStatus.OK);
+        return new ResponseEntity<>(activity, HttpStatus.OK);
     }
 
     @ApiResponse(responseCode = "200", description = "Success")
@@ -58,14 +55,12 @@ public class ActivityController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @GetMapping(path = "/activities/{messageId}")
-    public ResponseEntity<Activity> searchActivities(@RequestParam (name = "messageId") Long messageId){
+    public ResponseEntity<Activity> searchActivities(@RequestParam(name = "messageId") Long messageId) {
 
-       Activity activity=activityService.searchActivities(messageId);
+        Activity activity = activityService.searchActivities(messageId);
 
-        return new ResponseEntity<>(activity,HttpStatus.OK);
+        return new ResponseEntity<>(activity, HttpStatus.OK);
     }
-
-
 
 
 }

@@ -1,8 +1,6 @@
 package com.crossasyst.trackingdatabase.model;
 
-import com.crossasyst.trackingdatabase.entity.NodeTypeEntity;
 import com.crossasyst.trackingdatabase.model.base.Base;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

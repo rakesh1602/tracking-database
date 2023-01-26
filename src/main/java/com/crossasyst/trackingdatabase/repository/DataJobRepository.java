@@ -11,8 +11,5 @@ import java.util.Optional;
 public interface DataJobRepository extends CrudRepository<DataJobEntity, Long> {
 
     @Query(value = "select d from DataJobEntity d where d.dataJobGUID=?1")
-    DataJobEntity findByDataJobGuid(String datajobGuid);
-
-   /* @Query(value = "select d from DataJobEntity d where d.dataJobGUID=?1")
-    Optional<DataJobEntity> findByGuid(String datajobGuid);*/
+    Optional<DataJobEntity> findByDataJobGuid(String dataJobGuid);
 }

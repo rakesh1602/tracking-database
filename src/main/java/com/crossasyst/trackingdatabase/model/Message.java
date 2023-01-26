@@ -1,8 +1,6 @@
 package com.crossasyst.trackingdatabase.model;
 
 import com.crossasyst.trackingdatabase.model.base.Base;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,19 +9,12 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
 public class Message extends Base {
-
-    /*@NotBlank(message = "Data job Guid should not be empty or null")
-    @Size(max = 10, message = "Data job Guid maximum size 10 character")
-    private String dataJobGuid;*/
 
     @NotBlank(message = "Log session id should not be empty or null ")
     private String logSessionId;
@@ -46,12 +37,6 @@ public class Message extends Base {
     @NotBlank(message = "Message type should not be empty or null")
     @Size(max = 20, message = "Message type maximum size 20 character")
     private String messageType;
-
-    /*@NotBlank(message = "Message Guid should not be empty or null")
-    private String messageGuid;*/
-
-    /*@NotBlank(message = "Previous message Guid should not be empty or null")
-    private String previousMessageGuid;*/
 
     @NotBlank(message = "External patient id should not be empty or null")
     private String externalPatientId;
@@ -82,10 +67,6 @@ public class Message extends Base {
     @NotBlank(message = "Error severity should not be empty or null")
     @Size(max = 10, message = "Error severity maximum size 10 character")
     private String errorSeverity;
-
-    /*private List<Activity> activityList;
-
-    private List<ObjectRef> objectRefList;*/
 
     private ProcessingStatusType processingStatusType;
 }

@@ -1,17 +1,16 @@
 package com.crossasyst.trackingdatabase.service;
 
-import com.crossasyst.trackingdatabase.entity.DataJobEntity;
 import com.crossasyst.trackingdatabase.entity.MessageEntity;
 import com.crossasyst.trackingdatabase.entity.ProcessingStatusTypeEntity;
 import com.crossasyst.trackingdatabase.mapper.MessageMapper;
 import com.crossasyst.trackingdatabase.model.Message;
 import com.crossasyst.trackingdatabase.repository.MessageRepository;
 import com.crossasyst.trackingdatabase.response.MessageResponse;
+import com.crossasyst.trackingdatabase.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -27,76 +26,44 @@ public class MessageService {
         this.messageMapper = messageMapper;
     }
 
+    /**
+     * @author Rakesh Chavan
+     */
     public MessageResponse createMsg(Message message) {
 
-        log.info("Create Message");
+        log.info("Adding message");
 
         MessageEntity messageEntity = messageMapper.modelToEntity(message);
         messageRepository.save(messageEntity);
-        log.info("Message saved successfully.");
-
+        log.info("Message details saved successfully.");
 
         MessageResponse messageResponse = new MessageResponse();
         messageResponse.setMessageId(messageEntity.getMsgId());
         messageResponse.setMessageGuid(messageEntity.getMessageGuid());
+        log.info("Message id {}", messageResponse.getMessageId());
 
         return messageResponse;
-
     }
 
     public Message updateMsg(String messageGuid, Message message) {
 
-        MessageEntity messageEntity = messageRepository.findByMessageGuid(messageGuid);
+        log.info("Retrieving message of message Guid{} .", messageGuid);
+
+        MessageEntity messageEntity = messageRepository.findByMessageGuid(messageGuid)
+                .orElseThrow(() -> new IllegalArgumentException(Constants.MESSAGE_GUID_NOT_FOUND));
+
         Long msgId = messageEntity.getMsgId();
         ProcessingStatusTypeEntity processingStatusTypeEntity = messageEntity.getProcessingStatusTypeEntity();
         String processingStatusTypeCd = processingStatusTypeEntity.getProcessingStatusTypeCd();
 
+        log.info("Updating message of message Guid {} .", messageGuid);
         MessageEntity newMessageEntity = messageMapper.modelToEntity(message);
         newMessageEntity.setMsgId(msgId);
         messageEntity.getProcessingStatusTypeEntity().setProcessingStatusTypeCd(processingStatusTypeCd);
         messageRepository.save(newMessageEntity);
 
+        log.info("Message updated of message Guid {} .", messageGuid);
+
         return message;
-
-
     }
-
-
-    /*public Message updateMsg(String messageGuid, Message message) {
-
-        Optional<MessageEntity> optionalMessageEntity=messageRepository.findByGuid(messageGuid);
-
-        if(optionalMessageEntity.isPresent()){
-            log.info("Message guid found");
-            optionalMessageEntity.get().setDataJobGuid(message.getDataJobGuid());
-            optionalMessageEntity.get().setLogSessionId(message.getLogSessionId());
-            optionalMessageEntity.get().setProcessingStartDt(message.getProcessingStartDt());
-            optionalMessageEntity.get().setProcessingEndDt(message.getProcessingEndDt());
-            optionalMessageEntity.get().setAttributes(message.getAttributes());
-            optionalMessageEntity.get().setSubjectId(message.getSubjectId());
-            optionalMessageEntity.get().setExceptionMessage(message.getExceptionMessage());
-            optionalMessageEntity.get().setMessageType(message.getMessageType());
-            optionalMessageEntity.get().setMessageGuid(message.getPreviousMessageGuid());
-            optionalMessageEntity.get().setPreviousMessageGuid(message.getPreviousMessageGuid());
-            optionalMessageEntity.get().setExternalPatientId(message.getExternalPatientId());
-            optionalMessageEntity.get().setPortalConsumerId(message.getPortalConsumerId());
-            optionalMessageEntity.get().setExternalMessageId(message.getExternalMessageId());
-            optionalMessageEntity.get().setPortalStaffId(message.getPortalStaffId());
-            optionalMessageEntity.get().setRevision(message.getRevision());
-            optionalMessageEntity.get().setErrorCd(message.getErrorCd());
-            optionalMessageEntity.get().setErrorDescription(message.getErrorDescription());
-            optionalMessageEntity.get().setErrorDescription(message.getErrorDescription());
-            optionalMessageEntity.get().setErrorSeverity(message.getErrorSeverity());
-
-            messageRepository.save(optionalMessageEntity.get());
-
-            log.info("Message updated.");
-        } else {
-            log.info("Message guid not found");
-        }
-
-        return message;
-
-    }*/
-
 }

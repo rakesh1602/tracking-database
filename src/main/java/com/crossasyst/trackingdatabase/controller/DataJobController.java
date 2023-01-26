@@ -1,8 +1,5 @@
 package com.crossasyst.trackingdatabase.controller;
 
-
-import com.crossasyst.trackingdatabase.model.Activity;
-import com.crossasyst.trackingdatabase.model.DataChannel;
 import com.crossasyst.trackingdatabase.model.DataJob;
 import com.crossasyst.trackingdatabase.model.JobStatusType;
 import com.crossasyst.trackingdatabase.response.DataJobResponse;
@@ -47,11 +44,11 @@ public class DataJobController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @PutMapping(path = "/datajobs/{datajobGuid}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DataJob> updateJob(@PathVariable String datajobGuid, @RequestBody @Valid DataJob dataJob){
+    public ResponseEntity<DataJob> updateJob(@PathVariable String datajobGuid, @RequestBody @Valid DataJob dataJob) {
 
-        dataJob=dataJobService.updateJob(datajobGuid, dataJob);
+        dataJob = dataJobService.updateJob(datajobGuid, dataJob);
 
-        return new ResponseEntity<>(dataJob,HttpStatus.OK);
+        return new ResponseEntity<>(dataJob, HttpStatus.OK);
     }
 
 

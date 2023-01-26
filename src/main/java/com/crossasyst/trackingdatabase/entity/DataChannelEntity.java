@@ -18,8 +18,6 @@ public class DataChannelEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-   /* @SequenceGenerator(name = "data_channel_seq_id", sequenceName = "data_channel_seq_id", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "data_channel_seq_id")*/
     @Column(name = "data_chanel_cd")
     private String dataChannelCd;
 

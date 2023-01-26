@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -15,6 +14,7 @@ import java.util.Date;
 @Entity
 @Table(name = "activity")
 public class ActivityEntity extends BaseEntity {
+
     @Id
     @SequenceGenerator(name = "activity_seq_id", sequenceName = "activity_seq_id", initialValue = 1000, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "activity_seq_id")
@@ -36,11 +36,9 @@ public class ActivityEntity extends BaseEntity {
     @JoinColumn(name = "message_entity_msg_id")
     private MessageEntity messageEntity;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "activity_type_entity_id", nullable = false)
     private ActivityTypeEntity activityTypeEntity;
-
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "processing_status_type_entity_id", nullable = false)

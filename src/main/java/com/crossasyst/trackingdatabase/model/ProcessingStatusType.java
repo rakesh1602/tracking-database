@@ -1,8 +1,5 @@
 package com.crossasyst.trackingdatabase.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,8 +22,6 @@ public class ProcessingStatusType {
     @NotBlank(message = "ActiveBit should not be empty or null")
     @Size(max = 10, message = "Active bit maximum size 10 character")
     private Integer activeBit;
-
-    /*private List<Activity> activityList;*/
 
     private List<Message> messageList;
 

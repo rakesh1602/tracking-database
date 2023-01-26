@@ -4,11 +4,11 @@ import com.crossasyst.trackingdatabase.entity.ProcessingStatusTypeEntity;
 import com.crossasyst.trackingdatabase.mapper.ProcessingStatusTypeMapper;
 import com.crossasyst.trackingdatabase.model.ProcessingStatusType;
 import com.crossasyst.trackingdatabase.repository.ProcessingStatusTypeRepository;
+import com.crossasyst.trackingdatabase.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -18,24 +18,27 @@ public class ProcessingStatusTypeService {
 
     private final ProcessingStatusTypeMapper processingStatusTypeMapper;
 
+    private ProcessingStatusType processingStatusType;
+
     @Autowired
     public ProcessingStatusTypeService(ProcessingStatusTypeRepository processingStatusTypeRepository, ProcessingStatusTypeMapper processingStatusTypeMapper) {
         this.processingStatusTypeRepository = processingStatusTypeRepository;
         this.processingStatusTypeMapper = processingStatusTypeMapper;
     }
 
+    /**
+     * @author Rakesh Chavan
+     */
     public ProcessingStatusType getProcessingStatus(String dataJobGuid) {
 
-        Optional<ProcessingStatusTypeEntity> optionalProcessingStatusTypeEntity=processingStatusTypeRepository.findByDataJobGuid(dataJobGuid);
+        log.info("Finding process status type of data job guid {} .", dataJobGuid);
 
-        ProcessingStatusType processingStatusType=new ProcessingStatusType();
+        ProcessingStatusTypeEntity processingStatusTypeEntity = processingStatusTypeRepository.findByDataJobGuid(dataJobGuid)
+                .orElseThrow(() -> new IllegalArgumentException(Constants.DATA_JOB_GUID_NOT_FOUND));
 
-        if(optionalProcessingStatusTypeEntity.isPresent()){
-            processingStatusType=processingStatusTypeMapper.entityToModel(optionalProcessingStatusTypeEntity.get());
-            log.info("Data job guid id {} found ",dataJobGuid);
-        } else {
-            log.info("Data job guid id {} not found", dataJobGuid);
-        }
+        processingStatusType = processingStatusTypeMapper.entityToModel(processingStatusTypeEntity);
+        log.info("Retrieving process status type of data job guid {} .", dataJobGuid);
+
         return processingStatusType;
     }
 

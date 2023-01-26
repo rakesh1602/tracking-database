@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UUIDGenerator {
 
-    UUID uuid=UUID.randomUUID();
-    private String dataJobGuid=uuid.toString();
+    UUID uuid = UUID.randomUUID();
+    private String dataJobGuid = uuid.toString();
 
 }

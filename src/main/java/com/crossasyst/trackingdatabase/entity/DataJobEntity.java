@@ -1,7 +1,6 @@
 package com.crossasyst.trackingdatabase.entity;
 
 import com.crossasyst.trackingdatabase.entity.base.BaseEntity;
-import com.crossasyst.trackingdatabase.model.base.Base;
 import com.crossasyst.trackingdatabase.utils.UUIDGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -28,10 +26,10 @@ public class DataJobEntity extends BaseEntity {
     private String jobDirection;
 
     @Transient
-    UUIDGenerator uuidGenerator=new UUIDGenerator();
+    UUIDGenerator uuidGenerator = new UUIDGenerator();
 
     @Column(name = "data_job_guid")
-    private String dataJobGUID= uuidGenerator.getDataJobGuid();
+    private String dataJobGUID = uuidGenerator.getDataJobGuid();
 
     @Column(name = "input_file_name")
     private String inputFileName;
@@ -71,8 +69,6 @@ public class DataJobEntity extends BaseEntity {
     private DataChannelEntity dataChannelEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_status_type_id",nullable = false)
+    @JoinColumn(name = "job_status_type_id", nullable = false)
     private JobStatusTypeEntity jobStatusTypeEntity;
-
-
 }

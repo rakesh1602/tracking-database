@@ -9,8 +9,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface DataJobMapper {
 
-    DataJobMapper INSTANCE = Mappers.getMapper(DataJobMapper.class);
-
     @Mapping(source = "dataChannel", target = "dataChannelEntity")
     @Mapping(source = "jobStatusType", target = "jobStatusTypeEntity")
     DataJobEntity modelToEntity(DataJob dataJob);

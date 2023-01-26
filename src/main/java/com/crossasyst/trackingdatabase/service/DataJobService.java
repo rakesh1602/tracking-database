@@ -7,11 +7,10 @@ import com.crossasyst.trackingdatabase.mapper.DataJobMapper;
 import com.crossasyst.trackingdatabase.model.DataJob;
 import com.crossasyst.trackingdatabase.repository.DataJobRepository;
 import com.crossasyst.trackingdatabase.response.DataJobResponse;
+import com.crossasyst.trackingdatabase.utils.Constants;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -27,9 +26,12 @@ public class DataJobService {
         this.dataJobMapper = dataJobMapper;
     }
 
+    /**
+     * @author Rakesh Chavan
+     */
     public DataJobResponse createJob(DataJob dataJob) {
 
-        log.info("Create data job.");
+        log.info("Adding data job.");
 
         DataJobEntity dataJobEntity = dataJobMapper.modelToEntity(dataJob);
         dataJobRepository.save(dataJobEntity);
@@ -38,69 +40,36 @@ public class DataJobService {
         DataJobResponse dataJobResponse = new DataJobResponse();
         dataJobResponse.setDataJobID(dataJobEntity.getDataJobId());
         dataJobResponse.setDataJobGuid(dataJobEntity.getDataJobGUID());
+        log.info("Data job id {} ", dataJobResponse.getDataJobID());
 
         return dataJobResponse;
     }
 
     public DataJob updateJob(String datajobGuid, DataJob dataJob) {
 
-        DataJobEntity dataJobEntity=dataJobRepository.findByDataJobGuid(datajobGuid);
-        Long dataJobId= dataJobEntity.getDataJobId();
+        log.info("Retrieving data job of data job guid {}. ", datajobGuid);
 
-        DataChannelEntity dataChannelEntity=dataJobEntity.getDataChannelEntity();
-        String dataChannelCd=dataChannelEntity.getDataChannelCd();
+        DataJobEntity dataJobEntity = dataJobRepository.findByDataJobGuid(datajobGuid)
+                .orElseThrow(() -> new IllegalArgumentException(Constants.DATA_JOB_GUID_NOT_FOUND));
 
-        JobStatusTypeEntity jobStatusTypeEntity=dataJobEntity.getJobStatusTypeEntity();
-        String jobStatusTypeCd=jobStatusTypeEntity.getJobStatusType();
+        Long dataJobId = dataJobEntity.getDataJobId();
 
-        DataJobEntity newDataJobEntity=dataJobMapper.modelToEntity(dataJob);
+        DataChannelEntity dataChannelEntity = dataJobEntity.getDataChannelEntity();
+        String dataChannelCd = dataChannelEntity.getDataChannelCd();
+
+        JobStatusTypeEntity jobStatusTypeEntity = dataJobEntity.getJobStatusTypeEntity();
+        String jobStatusTypeCd = jobStatusTypeEntity.getJobStatusType();
+
+        log.info("Updating data job entity of data job guid {}. ", datajobGuid);
+
+        DataJobEntity newDataJobEntity = dataJobMapper.modelToEntity(dataJob);
         newDataJobEntity.setDataJobId(dataJobId);
         newDataJobEntity.getDataChannelEntity().setDataChannelCd(dataChannelCd);
         newDataJobEntity.getJobStatusTypeEntity().setJobStatusType(jobStatusTypeCd);
         dataJobRepository.save(newDataJobEntity);
 
-        log.info("Updated");
+        log.info("Data job updated of  data job guid {} updated.", datajobGuid);
 
         return dataJob;
-
-
     }
-
-    /*public DataJob updateJob(String datajobGuid, DataJob dataJob) {
-
-        Optional<DataJobEntity> optionalDataJobEntity = dataJobRepository.findByGuid(datajobGuid);
-
-        DataJobEntity dataJobEntity = new DataJobEntity();
-        if (optionalDataJobEntity.isPresent()) {
-
-            log.info("Data job found with dataJobGuid {}", datajobGuid);
-
-            optionalDataJobEntity.get().setJobDirection(dataJob.getJobDirection());
-            optionalDataJobEntity.get().setDataJobGUID(dataJob.getDataJobGuid());
-            optionalDataJobEntity.get().setInputFileName(dataJob.getInputFileName());
-            optionalDataJobEntity.get().setProcessingStartDt(dataJob.getProcessingStartDt());
-            optionalDataJobEntity.get().setProcessingEndDt(dataJob.getProcessingEndDt());
-            optionalDataJobEntity.get().setDataFeed(dataJob.getDataFeed());
-            optionalDataJobEntity.get().setDataSource(dataJob.getDataSource());
-            optionalDataJobEntity.get().setDataPartner(dataJob.getDataPartner());
-            optionalDataJobEntity.get().setMsgType(dataJob.getMsgType());
-            optionalDataJobEntity.get().setJobType(dataJob.getJobType());
-            optionalDataJobEntity.get().setExternalSystemName(dataJob.getExternalSystemName());
-            optionalDataJobEntity.get().setOrgId(dataJob.getOrgId());
-            optionalDataJobEntity.get().setOrgUuid(dataJob.getOrgUuid());
-            dataJobRepository.save(optionalDataJobEntity.get());
-
-            log.info("Data job updated");
-
-
-            *//*dataJobEntity = dataJobMapper.modelToEntity(dataJob);
-            dataJobRepository.save(dataJobEntity);*//*
-
-        } else {
-            log.info("Data job not found with dataJobGuid {}", datajobGuid);
-        }
-
-        return dataJob;
-    }*/
-
 }

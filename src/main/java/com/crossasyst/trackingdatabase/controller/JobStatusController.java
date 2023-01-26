@@ -29,10 +29,9 @@ public class JobStatusController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @GetMapping(path = "datajobs/{datajobGuid}/status ")
-    public ResponseEntity<JobStatusType> getJobStatus(@RequestParam(name = "datajobGuid") String datajobGuid){
+    public ResponseEntity<JobStatusType> getJobStatus(@RequestParam(name = "datajobGuid") String dataJobGuid) {
 
-
-        JobStatusType jobStatusType=jobStatusService.getJobStatus(datajobGuid);
+        JobStatusType jobStatusType = jobStatusService.getJobStatus(dataJobGuid);
 
         return new ResponseEntity<>(jobStatusType, HttpStatus.OK);
     }

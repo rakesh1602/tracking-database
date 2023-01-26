@@ -4,6 +4,7 @@ import com.crossasyst.trackingdatabase.model.ProcessingStatusType;
 import com.crossasyst.trackingdatabase.service.ProcessingStatusTypeService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class ProcessingStatusTypeController {
 
     private final ProcessingStatusTypeService processingStatusTypeService;
 
+    @Autowired
     public ProcessingStatusTypeController(ProcessingStatusTypeService processingStatusTypeService) {
         this.processingStatusTypeService = processingStatusTypeService;
     }
@@ -27,9 +29,9 @@ public class ProcessingStatusTypeController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "System error")
     @GetMapping(path = "/datajobs/{datajobGuid}/processing-status")
-    public ResponseEntity<ProcessingStatusType> getProcessingType(@RequestParam(name = "datajobGuid") String dataJobGuid){
+    public ResponseEntity<ProcessingStatusType> getProcessingType(@RequestParam(name = "datajobGuid") String dataJobGuid) {
 
-        ProcessingStatusType processingStatusType=processingStatusTypeService.getProcessingStatus(dataJobGuid);
+        ProcessingStatusType processingStatusType = processingStatusTypeService.getProcessingStatus(dataJobGuid);
 
         return new ResponseEntity<>(processingStatusType, HttpStatus.OK);
     }
