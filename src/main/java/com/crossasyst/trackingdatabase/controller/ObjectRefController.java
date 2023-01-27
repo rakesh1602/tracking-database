@@ -24,6 +24,9 @@ public class ObjectRefController {
         this.objectRefService = objectRefService;
     }
 
+    /**
+     * @author Uttam Thackrey,Vaibhav Jadhav
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")
@@ -36,6 +39,9 @@ public class ObjectRefController {
         return new ResponseEntity<>(objectRefResponse, HttpStatus.OK);
     }
 
+    /**
+     * @author Uttam Thackrey,Vaibhav Jadhav
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")
@@ -48,6 +54,9 @@ public class ObjectRefController {
         return new ResponseEntity<>(objectRef, HttpStatus.OK);
     }
 
+    /**
+     * @author Adika Dome, Vishal Pandey
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")

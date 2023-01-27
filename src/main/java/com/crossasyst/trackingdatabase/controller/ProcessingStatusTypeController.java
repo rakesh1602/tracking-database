@@ -24,6 +24,9 @@ public class ProcessingStatusTypeController {
         this.processingStatusTypeService = processingStatusTypeService;
     }
 
+    /**
+     * @author Adika Dome, Vishal Pandey
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")

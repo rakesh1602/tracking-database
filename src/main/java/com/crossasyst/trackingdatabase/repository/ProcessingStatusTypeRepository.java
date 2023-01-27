@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ProcessingStatusTypeRepository extends CrudRepository<ProcessingStatusTypeEntity, String> {
 
     /**
-     * @author Rakesh Chavan
+     * @author @Query written by - Rakesh Chavan
      */
     @Query(value = "select p from ProcessingStatusTypeEntity p join p.messageEntity m where m.dataJobGUID=?1 ")
     Optional<ProcessingStatusTypeEntity> findByDataJobGuid(String dataJobGuid);

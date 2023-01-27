@@ -27,7 +27,7 @@ public class DataJobService {
     }
 
     /**
-     * @author Rakesh Chavan
+     * @author Rakesh Chavan, Sanket Mishra
      */
     public DataJobResponse createJob(DataJob dataJob) {
 
@@ -45,6 +45,9 @@ public class DataJobService {
         return dataJobResponse;
     }
 
+    /**
+     * @author Rushi Kandekar,Raj Bokade
+     */
     public DataJob updateJob(String datajobGuid, DataJob dataJob) {
 
         log.info("Retrieving data job of data job guid {}. ", datajobGuid);

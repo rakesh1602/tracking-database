@@ -35,7 +35,7 @@ public class ActivityService {
     }
 
     /**
-     * @author Rakesh Chavan
+     * @author Rakesh Chavan,Sanket Mishra
      */
     public ActivityResponse createActivity(Activity activity) {
 
@@ -53,7 +53,7 @@ public class ActivityService {
     }
 
     /**
-     * @author Rakesh Chavan
+     * @author Rakesh Chavan,Sanket Mishra
      */
     public Activity searchActivities(Long messageId) {
 
@@ -69,6 +69,9 @@ public class ActivityService {
         return activity;
     }
 
+    /**
+     * @author Rushi Kandekar,Raj Bokade
+     */
     public Activity updateActivity(Integer activityId, Activity activity) {
 
         log.info("Finding activities of activity id {} ", activityId);

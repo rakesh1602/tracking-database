@@ -26,7 +26,9 @@ public class DataJobController {
         this.dataJobService = dataJobService;
     }
 
-
+    /**
+     * @author Rakesh Chavan, Sanket Mishra
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")
@@ -39,6 +41,9 @@ public class DataJobController {
         return new ResponseEntity<>(dataJobResponse, HttpStatus.OK);
     }
 
+    /**
+     * @author Rushi Kandekar,Raj Bokade
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")

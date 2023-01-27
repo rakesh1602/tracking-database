@@ -25,6 +25,10 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
+
+    /**
+     * @author Rakesh Chavan,Sanket Mishra
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")
@@ -38,6 +42,9 @@ public class ActivityController {
     }
 
 
+    /**
+     * @author Rushi Kandekar,Raj Bokade
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")
@@ -50,6 +57,10 @@ public class ActivityController {
         return new ResponseEntity<>(activity, HttpStatus.OK);
     }
 
+
+    /**
+     * @author Rakesh Chavan,Sanket Mishra
+     */
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "400", description = "Invalid request")
     @ApiResponse(responseCode = "404", description = "Not found")

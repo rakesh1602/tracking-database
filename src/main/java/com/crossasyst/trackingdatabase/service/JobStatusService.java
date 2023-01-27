@@ -27,6 +27,9 @@ public class JobStatusService {
         this.jobStatusMapper = jobStatusMapper;
     }
 
+    /**
+     * @author Adika Dome, Vishal Pandey
+     */
     public JobStatusType getJobStatus(String dataJobGuid) {
 
         log.info("Retrieving job status of data job guid {}. ", dataJobGuid);

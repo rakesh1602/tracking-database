@@ -27,7 +27,7 @@ public class MessageService {
     }
 
     /**
-     * @author Rakesh Chavan
+     * @author Rakesh Chavan, Sanket Mishra
      */
     public MessageResponse createMsg(Message message) {
 
@@ -45,6 +45,9 @@ public class MessageService {
         return messageResponse;
     }
 
+    /**
+     * @author Rushi Kandekar,Raj Bokade
+     */
     public Message updateMsg(String messageGuid, Message message) {
 
         log.info("Retrieving message of message Guid{} .", messageGuid);

@@ -27,7 +27,7 @@ public class ObjectRefService {
     }
 
     /**
-     * @author Rakesh Chavan
+     * @author Uttam Thackrey,Vaibhav Jadhav
      */
     public ObjectRefResponse createObjectRef(ObjectRef objectRef) {
 
@@ -46,6 +46,9 @@ public class ObjectRefService {
         return objectRefResponse;
     }
 
+    /**
+     * @author Uttam Thackrey,Vaibhav Jadhav
+     */
     public ObjectRef updateObjectRef(Long objectRefId, ObjectRef objectRef) {
 
         log.info("Retrieving object ref of id {}.", objectRefId);
@@ -73,6 +76,9 @@ public class ObjectRefService {
         return objectRef;
     }
 
+    /**
+     * @author Adika Dome, Vishal Pandey
+     */
     public void patchObjectRefById(ObjectRef patchObjectRef, Long objectRefId) {
         ObjectRefEntity objectRefEntity = objectRefRepository.findById(objectRefId)
                 .orElseThrow(() -> new IllegalArgumentException(Constants.OBJECT_REF_ID_NOT_FOUND));
